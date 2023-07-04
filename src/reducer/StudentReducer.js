@@ -18,8 +18,16 @@ const studentSlice = createSlice({
         sf.fav_subject = fav_subject;
       }
     },
+    deleteStudent: (state, action) => {
+      const { id } = action.payload;
+      const sf = state.find((student) => student.id == id);
+      if (sf) {
+        return state.filter((s) => s.id !== id);
+      }
+    },
   },
 });
 
-export const { addStudent, updateStudent } = studentSlice.actions;
+export const { addStudent, updateStudent, deleteStudent } =
+  studentSlice.actions;
 export default studentSlice.reducer;

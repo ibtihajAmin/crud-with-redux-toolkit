@@ -1,8 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteStudent } from "../reducer/StudentReducer";
 
 export default function Home() {
   const students = useSelector((state) => state.students);
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(
+      deleteStudent({
+        id: id,
+      })
+    );
+  };
   return (
     <div>
       <div className="container">
@@ -36,7 +46,12 @@ export default function Home() {
                   >
                     Edit
                   </Link>
-                  <button className="btn btn-sm btn-danger ms-3">Delete</button>
+                  <button
+                    onClick={() => handleDelete(student.id)}
+                    className="btn btn-sm btn-danger ms-3"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
